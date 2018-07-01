@@ -17,4 +17,4 @@ Download [pixasso.js](https://raw.githubusercontent.com/howion/pixasso/master/pi
 
 ## License
 
-[MIT](https://github.com/howion/pixasso/blob/master/LICENSE.md)
+[MIT](https://github.com/howion/pixasso/blob/master/LICENSE)
