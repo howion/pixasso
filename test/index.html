@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>pixasso</title>
+    <style>
+        body
+        {
+            align-items: center;
+            text-align: center;
+            margin: 0;
+        }
+        #file
+        {
+            position: absolute;
+            opacity: 0;
+            z-index: -1;
+        }
+        .input-upload-label
+        {
+            display: block;
+            float: left;
+            font-size: 18px;
+            padding: 12px 18px;
+            background-color: #eee;
+            border-radius: 3px;
+            font-family: 'Roboto', monospace, sans-serif;
+        }
+        .container
+        {
+            display: block;
+            float: left;
+            margin-left: 20px;
+        }
+        .input-pixsize-label, .input-zoom-label, .input-cpm-label
+        {
+            display: block;
+            float: left;
+            clear: right;
+            font-size: 12px;
+            font-family: 'Roboto', monospace, sans-serif;
+            color: #ccc;
+        }
+        #pixsize, #zoom, #cpm
+        {
+            display: block;
+            float: left;
+            clear: left;
+            margin-top: 3px;
+            border: none;
+            outline: 0;
+            background-color: #eee;
+            padding: 7px 8px;
+            border-radius: 3px;
+            width: 54px;
+        }
+        #cpm
+        {
+            width: auto;
+        }
+        #result
+        {
+            display: inline-block;
+            margin: 0;
+            max-width: 100%;
+            padding: 0;
+            outline: 0;
+        }
+        .inputs-container
+        {
+            display: inline-block;
+            margin: 48px 0 48px 0;
+        }
+        #pixelazing
+        {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Roboto', monospace, sans-serif;
+            font-size: 32px;
+        }
+    </style>
+</head>
+<body>
+    <!-- LOADING SCREEN -->
+    <div id="pixelazing">
+        Pixelazing...
+    </div>
+
+    <!-- INTERFACE -->
+    <div class="inputs-container">
+        <input type="file" id="file" accept="image/*" />
+        <label class="input-upload-label" for="file">Upload image</label>
+        <div class="container">
+            <span class="input-pixsize-label">PIXEL SIZE</span>
+            <input id="pixsize" type="number" value="10" min="1"/>
+        </div>
+        <div class="container">
+            <span class="input-zoom-label">ZOOM</span>
+            <input id="zoom" type="number" value="10" min="1"/>
+        </div>
+        <div class="container">
+            <span class="input-cpm-label">COLOR PICK MODE</span>
+            <select id="cpm" name="">
+                <option value="0">First Color</option>
+                <option value="1" selected="selected">Joint Color</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- FORCE NEW LINE-->
+    <br>
+
+    <!-- RESULT COMES HERE -->
+    <img id="result" src="">
+
+    <!-- SOME JS CODE -->
+    <script type="text/javascript" src="../pixasso.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('file').onchange = function(e) {
+                var target = e.target || window.event.srcElement;
+                var file = target.files[0];
+
+                // IS FILE READER SUPPORTED
+                if (FileReader)
+                {
+                    if (file)
+                    {
+                        var reader = new FileReader();
+
+                        reader.onload = function()
+                        {
+                            var img = document.createElement('img');
+                            img.src = reader.result;
+
+                            img.onload = function(w, h)
+                            {
+                                window._img = img;
+                                update();
+                            }
+                        }
+
+                        reader.readAsDataURL(file);
+                    }
+                }
+                else
+                {
+                    alert('FileReader doesn\'t supported on this browser');
+                }
+            }
+
+            var eloader = document.getElementById('pixelazing');
+            var epixsize = document.getElementById('pixsize');
+            var ezoom = document.getElementById('zoom');
+            var ecpm = document.getElementById('cpm');
+
+            epixsize.onchange = update;
+            ezoom.onchange = update;
+            ecpm.onchange = update;
+
+            function update()
+            {
+                if (window._img === undefined) return;
+
+                var pixsize = parseInt(epixsize.value)
+                var zoom = parseInt(ezoom.value)
+                var cpm = parseInt(ecpm.options[ecpm.selectedIndex].value);
+
+                eloader.style.display = 'flex';
+
+                // GIVE SOME TIME FOR LOADING SCREEN TO LOAD
+                setTimeout(function() {
+                    // PIXELIZE
+                    var result = pixasso.createPixelArt(window._img, pixsize, zoom, cpm);
+
+                    // SHOW RESULT
+                    document.getElementById('result').src = result.src
+
+                    // HIDE LOADING SCREEN
+                    eloader.style.display = 'none';
+                }, 100);
+            }
+        }, false);
+    </script>
+</body>
+</html>
