@@ -4,7 +4,7 @@ Javascript library for browsers to generate pixel arts from images with custom p
 
 ## Usage
 
-Download [pixasso.js](https://raw.githubusercontent.com/howion/pixasso/master/pixasso.min.js) and link to html file
+Download and include [pixasso.min.js](https://github.com/howion/pixasso/blob/master/lib/pixasso.min.js)
 
 ```html
 <script src="pixasso.min.js"></script>
