@@ -124,7 +124,7 @@
     <img id="result" src="">
 
     <!-- SOME JS CODE -->
-    <script type="text/javascript" src="../lib/pixasso.min.js"></script>
+    <script type="text/javascript" src="../lib/pixasso.js"></script>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('file').onchange = function(e) {
@@ -141,13 +141,14 @@
                         reader.onload = function()
                         {
                             var img = document.createElement('img');
-                            img.src = reader.result;
 
                             img.onload = function(w, h)
                             {
                                 window._img = img;
                                 update();
                             }
+
+                            img.src = reader.result;
                         }
 
                         reader.readAsDataURL(file);
@@ -176,6 +177,7 @@
                 var zoom = parseInt(ezoom.value)
                 var cpm = parseInt(ecpm.options[ecpm.selectedIndex].value);
 
+                // DISPLAY LOADING SCREEN
                 eloader.style.display = 'flex';
 
                 // GIVE SOME TIME FOR LOADING SCREEN TO LOAD
