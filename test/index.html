@@ -5,97 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>pixasso</title>
     <style>
-        body
-        {
-            align-items: center;
-            text-align: center;
-            margin: 0;
-        }
-        #file
-        {
-            position: absolute;
-            opacity: 0;
-            z-index: -1;
-        }
-        .input-upload-label
-        {
-            display: block;
-            float: left;
-            font-size: 18px;
-            padding: 12px 18px;
-            background-color: #eee;
-            border-radius: 3px;
-            font-family: 'Roboto', monospace, sans-serif;
-        }
-        .container
-        {
-            display: block;
-            float: left;
-            margin-left: 20px;
-        }
-        .input-pixsize-label, .input-zoom-label, .input-cpm-label
-        {
-            display: block;
-            float: left;
-            clear: right;
-            font-size: 12px;
-            font-family: 'Roboto', monospace, sans-serif;
-            color: #ccc;
-        }
-        #pixsize, #zoom, #cpm
-        {
-            display: block;
-            float: left;
-            clear: left;
-            margin-top: 3px;
-            border: none;
-            outline: 0;
-            background-color: #eee;
-            padding: 7px 8px;
-            border-radius: 3px;
-            width: 54px;
-        }
-        #cpm
-        {
-            width: auto;
-        }
-        #result
-        {
-            display: inline-block;
-			vertical-align: middle;
-            margin: 0;
-            max-width: 100%;
-            padding: 0;
-            outline: 0;
-        }
-        .inputs-container
-        {
-            display: inline-block;
-            margin: 48px 0 48px 0;
-        }
-        #pixelazing
-        {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 99;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Roboto', monospace, sans-serif;
-            font-size: 32px;
-        }
+        body{align-items:center;text-align:center;margin:0}
+        #file{position:absolute;opacity:0;z-index:-1}
+        .input-upload-label{display:block;float:left;font-size:18px;padding:12px 18px;background-color:#eee;border-radius:3px;font-family:'Roboto',monospace,sans-serif}
+        .container{display:block;float:left;margin-left:20px}
+        .input-pixsize-label,.input-zoom-label,.input-cpm-label{display:block;float:left;clear:right;font-size:12px;font-family:'Roboto',monospace,sans-serif;color:#ccc}
+        #pixsize,#zoom,#cpm{display:block;float:left;clear:left;margin-top:3px;border:none;outline:0;background-color:#eee;padding:7px 8px;border-radius:3px;width:54px}
+        #cpm{width:auto}
+        #result{display:inline-block;vertical-align:middle;margin:0;max-width:100%;padding:0;outline:0}
+        .inputs-container{display:inline-block;margin:48px 0}
+        #pixelazing{position:fixed;top:0;left:0;width:100%;height:100%;z-index:99;background-color:rgba(0,0,0,0.8);color:#fff;display:none;align-items:center;justify-content:center;font-family:'Roboto',monospace,sans-serif;font-size:32px}
     </style>
 </head>
 <body>
     <!-- LOADING SCREEN -->
-    <div id="pixelazing">
-        Pixelazing...
-    </div>
+    <div id="pixelazing">Pixelazing...</div>
 
     <!-- INTERFACE -->
     <div class="inputs-container">
@@ -124,7 +48,6 @@
     <!-- RESULT COMES HERE -->
     <img id="result" src="">
 
-    <!-- SOME JS CODE -->
     <script type="text/javascript" src="../lib/pixasso.js"></script>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function() {
@@ -138,33 +61,22 @@
                     if (file)
                     {
                         var reader = new FileReader();
-
                         reader.onload = function()
                         {
                             var img = document.createElement('img');
-
-                            img.onload = function(w, h)
-                            {
-                                window._img = img;
-                                update();
-                            }
-
+                            img.onload = function(w, h) { window._img = img; update(); }
                             img.src = reader.result;
                         }
-
                         reader.readAsDataURL(file);
                     }
-                }
-                else
-                {
-                    alert('FileReader doesn\'t supported on this browser');
-                }
+                } else { alert('FileReader doesn\'t supported on this browser'); }
             }
 
             var eloader = document.getElementById('pixelazing');
             var epixsize = document.getElementById('pixsize');
             var ezoom = document.getElementById('zoom');
             var ecpm = document.getElementById('cpm');
+            var eresult = document.getElementById('result');
 
             epixsize.onchange = update;
             ezoom.onchange = update;
@@ -183,12 +95,8 @@
 
                 // GIVE SOME TIME FOR LOADING SCREEN TO LOAD
                 setTimeout(function() {
-                    // PIXELIZE
-                    var result = pixasso.createPixelArt(window._img, pixsize, zoom, cpm);
-
-                    // SHOW RESULT
-                    document.getElementById('result').src = result.src
-
+                    // PIXELIZE IMAGE
+                    eresult.src = pixasso.createPixelArt(window._img, pixsize, zoom, cpm).src
                     // HIDE LOADING SCREEN
                     eloader.style.display = 'none';
                 }, 100);
