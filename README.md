@@ -4,7 +4,7 @@ Javascript library for browsers to generate pixel arts from images with custom p
 
 ## Usage
 
-Download and include [pixasso.min.js](https://github.com/howion/pixasso-js/blob/master/lib/pixasso.min.js)
+Download and include [pixasso.min.js](https://github.com/howion/pixasso/blob/master/lib/pixasso.min.js)
 
 ```html
 <script src="pixasso.min.js"></script>
@@ -27,9 +27,9 @@ pixasso.createPixelArt(img, options.pixSize, options.zoom, options.colorPickMode
 ## Example
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/howion/box/master/pixasso-js/example.png">
+  <img src="https://raw.githubusercontent.com/howion/box/master/pixasso/example.png">
 </p>
 
 ## License
 
-[**MIT**](https://github.com/howion/pixasso-js/blob/master/LICENSE)
+[**MIT**](https://github.com/howion/pixasso/blob/master/LICENSE)
