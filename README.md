@@ -32,4 +32,4 @@ pixasso.createPixelArt(img, options.pixSize, options.zoom, options.colorPickMode
 
 ## License
 
-[MIT](https://github.com/howion/pixasso-js/blob/master/LICENSE)
+[**MIT**](https://github.com/howion/pixasso-js/blob/master/LICENSE)
