@@ -30,6 +30,10 @@ pixasso.createPixelArt(img, options.pixSize, options.zoom, options.colorPickMode
   <img src="https://raw.githubusercontent.com/howion/box/master/pixasso/example.png">
 </p>
 
+## Related
+
+* [`howion/pixelmap`](https://github.com/howion/pixelmap)
+
 ## License
 
 [**MIT**](https://github.com/howion/pixasso/blob/master/LICENSE)
