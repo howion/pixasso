@@ -32,7 +32,7 @@ pixasso.createPixelArt(img, options.pixSize, options.zoom, options.colorPickMode
 
 ## Related
 
-* [`howion/pixelmap`](https://github.com/howion/pixelmap)
+* [`howion/pixelmap-functions`](https://github.com/howion/pixelmap-functions)
 
 ## License
 
