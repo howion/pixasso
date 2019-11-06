@@ -17,7 +17,7 @@ var img = document.createElement('img');
 var options = {
   pixSize: 10, // pixSize > 0
   zoom: 10,    // zoom    > 0
-  colorPickMode: pixasso.colorPickMode.JointColor
+  colorPickMode: pixasso.colorPickMode.JointColor // OR pixasso.colorPickMode.FirstColor
 };
 
 pixasso.createPixelArt(img, options.pixSize, options.zoom, options.colorPickMode);
